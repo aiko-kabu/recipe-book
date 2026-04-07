@@ -92,6 +92,8 @@ padding: 16px 0 12px;
 overflow-x: auto;
 scrollbar-width: none;
 flex-wrap: wrap;
+position: relative;
+z-index: 1;
 }
 .filter-bar::-webkit-scrollbar { display: none; }
 .filter-chip {
@@ -243,7 +245,7 @@ color: var(–ink-light);
 .modal-overlay {
 position: fixed;
 inset: 0;
-background: rgba(42,31,20,0.5);
+background: rgba(42,31,20,0.7);
 z-index: 300;
 display: none;
 align-items: flex-end;
@@ -259,6 +261,8 @@ max-height: 92vh;
 overflow-y: auto;
 padding: 0 0 40px;
 animation: slideUp 0.3s ease;
+position: relative;
+z-index: 301;
 }
 @keyframes slideUp {
 from { transform: translateY(100%); }
@@ -497,8 +501,10 @@ align-items: center;
 justify-content: center;
 font-size: 64px;
 color: var(–border);
+overflow: hidden;
+border-radius: 16px 16px 0 0;
 }
-.detail-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px 16px 0 0; }
+.detail-image img { width: 100%; height: 100%; object-fit: cover; }
 .detail-body { padding: 20px 24px; }
 .detail-title {
 font-family: ‘Shippori Mincho’, serif;
@@ -764,7 +770,7 @@ color: var(–ink-light);
 
 <!-- Add/Edit Modal -->
 
-<div class="modal-overlay" id="addModal">
+<div class="modal-overlay" id="addModal" style="z-index:400;">
   <div class="modal">
     <div class="modal-handle"></div>
     <div class="modal-header">
