@@ -1044,15 +1044,15 @@ function openAddModal(recipe = null) {
   if (formIngredients.length === 0) formIngredients = [{ name: '', amount: '' }];
   renderIngredients();
 
-  document.getElementById('addModal').classList.add('open');
+  openModal('addModal');
 }
 
 document.getElementById('addBtn').addEventListener('click', () => openAddModal());
 document.getElementById('closeAdd').addEventListener('click', () => {
-  document.getElementById('addModal').classList.remove('open');
+  closeModal('addModal');
 });
 document.getElementById('addModal').addEventListener('click', e => {
-  if (e.target === document.getElementById('addModal')) document.getElementById('addModal').classList.remove('open');
+  if (e.target === document.getElementById('addModal')) closeModal('addModal');
 });
 
 // Servings
@@ -1205,8 +1205,24 @@ document.getElementById('saveBtn').addEventListener('click', () => {
   }
 
   save();
-  document.getElementById('addModal').classList.remove('open');
+  closeModal('addModal');
 });
+
+// ---- Modal helpers ----
+function openModal(id) {
+  document.querySelector('.container').style.visibility = 'hidden';
+  document.getElementById('addBtn').style.visibility = 'hidden';
+  document.getElementById(id).classList.add('open');
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  // only show container if no other modal open
+  const anyOpen = document.querySelector('.modal-overlay.open');
+  if (!anyOpen) {
+    document.querySelector('.container').style.visibility = '';
+    document.getElementById('addBtn').style.visibility = '';
+  }
+}
 
 // ---- Detail Modal ----
 function openDetail(id) {
@@ -1214,7 +1230,7 @@ function openDetail(id) {
   if (!viewingRecipe) return;
   scaleServings = 4;
   renderDetail();
-  document.getElementById('detailModal').classList.add('open');
+  openModal('detailModal');
 }
 
 function renderDetail() {
@@ -1295,11 +1311,11 @@ document.getElementById('scaleInc').addEventListener('click', () => {
 });
 
 document.getElementById('detailModal').addEventListener('click', e => {
-  if (e.target === document.getElementById('detailModal')) document.getElementById('detailModal').classList.remove('open');
+  if (e.target === document.getElementById('detailModal')) closeModal('detailModal');
 });
 
 document.getElementById('editBtn').addEventListener('click', () => {
-  document.getElementById('detailModal').classList.remove('open');
+  closeModal('detailModal');
   openAddModal(viewingRecipe);
 });
 
@@ -1307,7 +1323,7 @@ document.getElementById('deleteBtn').addEventListener('click', () => {
   if (!confirm(`「${viewingRecipe.name}」を削除しますか？`)) return;
   recipes = recipes.filter(r => r.id !== viewingRecipe.id);
   save();
-  document.getElementById('detailModal').classList.remove('open');
+  closeModal('detailModal');
 });
 
 // Lightbox
