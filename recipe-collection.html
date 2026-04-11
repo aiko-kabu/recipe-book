@@ -369,12 +369,42 @@ document.getElementById('addModal').addEventListener('click', e=>{if(e.target===
 document.getElementById('servDec').addEventListener('click', ()=>{if(formServings>1){formServings--;document.getElementById('servNum').textContent=formServings;}});
 document.getElementById('servInc').addEventListener('click', ()=>{formServings++;document.getElementById('servNum').textContent=formServings;});
 
-document.getElementById('imgFile').addEventListener('change', e=>{
+// 画像圧縮
+function compressImage(dataUrl, maxWidth=800, quality=0.7) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      let w = img.width, h = img.height;
+      if (w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      resolve(canvas.toDataURL('image/jpeg', quality));
+    };
+    img.src = dataUrl;
+  });
+}
+
+document.getElementById('imgFile').addEventListener('change', async e=>{
   const file=e.target.files[0];if(!file)return;
-  const r=new FileReader();r.onload=ev=>{imgDataUrl=ev.target.result;const p=document.getElementById('imgPreview');p.src=imgDataUrl;p.style.display='block';};r.readAsDataURL(file);
+  const reader=new FileReader();
+  reader.onload=async ev=>{
+    imgDataUrl=await compressImage(ev.target.result);
+    const p=document.getElementById('imgPreview');p.src=imgDataUrl;p.style.display='block';
+  };
+  reader.readAsDataURL(file);
 });
-document.getElementById('subImgFile').addEventListener('change', e=>{
-  Array.from(e.target.files).forEach(file=>{const r=new FileReader();r.onload=ev=>{formSubImages.push(ev.target.result);renderSubImages();};r.readAsDataURL(file);});
+document.getElementById('subImgFile').addEventListener('change', async e=>{
+  for(const file of Array.from(e.target.files)){
+    const reader=new FileReader();
+    await new Promise(res=>{
+      reader.onload=async ev=>{
+        formSubImages.push(await compressImage(ev.target.result, 600, 0.6));
+        renderSubImages();res();
+      };
+      reader.readAsDataURL(file);
+    });
+  }
   e.target.value='';
 });
 
@@ -420,21 +450,14 @@ function renderIngredients() {
 document.getElementById('addIngBtn').addEventListener('click',()=>{formIngredients.push({name:'',amount:''});renderIngredients();document.getElementById('ingList').lastElementChild?.querySelector('input')?.focus();});
 
 document.getElementById('saveBtn').addEventListener('click',()=>{
-  alert('保存ボタン押された');
-  const name=document.getElementById('fName').value.trim();
-  alert('名前: ' + name);
-  if(!name){alert('料理名を入力してください');return;}
-  alert('レシピ作成中...');
+  const name=document.getElementById('fName').value.trim();if(!name){alert('料理名を入力してください');return;}
   const recipe={id:editingId||Date.now().toString(),name,category:document.getElementById('fCat').value,url:document.getElementById('fUrl').value.trim(),memo:document.getElementById('fMemo').value.trim(),servings:formServings,ingredients:formIngredients.filter(i=>i.name.trim()),tags:formTags,image:imgDataUrl,subImages:formSubImages,fav:false,createdAt:Date.now()};
-  alert('保存処理開始...');
   try {
     if(editingId){const idx=recipes.findIndex(r=>r.id===editingId);if(idx!==-1){recipe.fav=recipes[idx].fav;recipe.createdAt=recipes[idx].createdAt;recipes[idx]=recipe;}}
     else{recipes.unshift(recipe);}
-    save();
-    alert('保存成功！');
-    closeModal('addModal');
+    save();closeModal('addModal');
   } catch(e) {
-    alert('エラー: ' + e.message);
+    alert('保存できませんでした。写真を減らすか、設定→Safari→詳細→Webサイトデータからサイトのデータを削除してみてください。');
   }
 });
 
