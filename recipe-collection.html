@@ -321,7 +321,7 @@ function render() {
       <div class="card-body">
         <div class="card-title">${r.name}</div>
         <div class="card-tags">
-          ${r.category?`<span class="tag tag-cat">${r.category}`:''}</span>
+          ${r.category?`<span class="tag tag-cat">${r.category}</span>`:''}
           ${(r.tags||[]).slice(0,3).map(t=>`<span class="tag tag-custom">${t}</span>`).join('')}
         </div>
         <div class="card-meta">${r.servings?`📋 ${r.servings}人前基準`:''}</div>
