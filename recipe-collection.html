@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -21,120 +22,102 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Zen Maru Gothic', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; }
 
-  header { background: var(--ink); padding: 20px 24px 16px; display: flex; align-items: center; justify-content: space-between; }
-  .logo { font-family: 'Shippori Mincho', serif; font-size: 22px; color: var(--cream); letter-spacing: 0.08em; display: flex; align-items: center; gap: 10px; }
-  .header-count { font-size: 12px; color: #a09080; }
+header { background: var(–ink); padding: 20px 24px 16px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-family: ‘Shippori Mincho’, serif; font-size: 22px; color: var(–cream); letter-spacing: 0.08em; display: flex; align-items: center; gap: 10px; }
+.header-count { font-size: 12px; color: #a09080; }
 
-  .container { max-width: 900px; margin: 0 auto; padding: 0 16px 80px; }
+.container { max-width: 900px; margin: 0 auto; padding: 0 16px 80px; }
 
-  .fab { position: fixed; bottom: 28px; right: 24px; width: 60px; height: 60px; background: var(--accent); color: white; border: none; border-radius: 50%; font-size: 28px; cursor: pointer; box-shadow: 0 4px 20px rgba(192,57,43,0.4); display: flex; align-items: center; justify-content: center; z-index: 50; }
+.fab { position: fixed; bottom: 28px; right: 24px; width: 60px; height: 60px; background: var(–accent); color: white; border: none; border-radius: 50%; font-size: 28px; cursor: pointer; box-shadow: 0 4px 20px rgba(192,57,43,0.4); display: flex; align-items: center; justify-content: center; z-index: 50; }
 
-  .filter-bar { display: flex; gap: 8px; padding: 16px 0 12px; overflow-x: auto; scrollbar-width: none; flex-wrap: wrap; }
-  .filter-bar::-webkit-scrollbar { display: none; }
-  .filter-chip { padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--border); background: white; color: var(--ink-light); font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; cursor: pointer; white-space: nowrap; }
-  .filter-chip.active { background: var(--ink); color: white; border-color: var(--ink); }
+.filter-bar { display: flex; gap: 8px; padding: 16px 0 12px; overflow-x: auto; scrollbar-width: none; flex-wrap: wrap; }
+.filter-bar::-webkit-scrollbar { display: none; }
+.filter-chip { padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(–border); background: white; color: var(–ink-light); font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 13px; cursor: pointer; white-space: nowrap; }
+.filter-chip.active { background: var(–ink); color: white; border-color: var(–ink); }
 
-  .search-wrap { position: relative; margin-bottom: 4px; }
-  .search-input { width: 100%; padding: 12px 16px 12px 40px; border: 1.5px solid var(--border); border-radius: 12px; background: white; font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; color: var(--ink); outline: none; }
-  .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; }
+.search-wrap { position: relative; margin-bottom: 4px; }
+.search-input { width: 100%; padding: 12px 16px 12px 40px; border: 1.5px solid var(–border); border-radius: 12px; background: white; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 14px; color: var(–ink); outline: none; }
+.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; }
 
-  .recipes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-top: 16px; }
-  .recipe-card { background: white; border-radius: 16px; overflow: hidden; border: 1.5px solid var(--border); cursor: pointer; position: relative; }
-  .card-image { width: 100%; height: 160px; background: var(--warm); display: flex; align-items: center; justify-content: center; font-size: 48px; color: var(--border); overflow: hidden; }
-  .card-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .card-body { padding: 14px; }
-  .card-title { font-family: 'Shippori Mincho', serif; font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-  .card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
-  .tag { padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; }
-  .tag-cat { background: var(--green-soft); color: var(--green); }
-  .tag-custom { background: #e8f0fe; color: #3a6ad4; }
-  .card-meta { font-size: 12px; color: var(--ink-light); }
-  .fav-btn { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.9); border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.recipes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin-top: 16px; }
 
-  .empty-state { text-align: center; padding: 60px 20px; color: var(--ink-light); }
-  .empty-icon { font-size: 56px; margin-bottom: 16px; }
-  .empty-text { font-family: 'Shippori Mincho', serif; font-size: 18px; margin-bottom: 8px; }
+.recipe-card { background: white; border-radius: 16px; border: 1.5px solid var(–border); cursor: pointer; position: relative; padding: 18px; }
+.card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; gap: 8px; }
+.card-title { font-family: ‘Shippori Mincho’, serif; font-size: 17px; font-weight: 600; line-height: 1.4; flex: 1; }
+.fav-btn { background: none; border: none; font-size: 20px; cursor: pointer; flex-shrink: 0; padding: 0; line-height: 1; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+.tag { padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; }
+.tag-cat { background: var(–green-soft); color: var(–green); }
+.tag-custom { background: #e8f0fe; color: #3a6ad4; }
+.card-meta { font-size: 12px; color: var(–ink-light); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.card-link { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(–accent); text-decoration: none; background: #fff0ee; padding: 4px 10px; border-radius: 20px; border: 1px solid #f5c6c0; }
 
-  /* MODAL - display:none/flex切り替え、mainContainerを完全に隠す方式 */
-  .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 10000; align-items: flex-end; justify-content: center; }
-  .modal-overlay.open { display: flex; }
-  .modal { background: var(--cream); border-radius: 24px 24px 0 0; width: 100%; max-width: 600px; max-height: 92vh; overflow-y: auto; padding: 0 0 40px; }
-  .modal-handle { width: 40px; height: 4px; background: var(--border); border-radius: 2px; margin: 14px auto 0; }
-  .modal-header { padding: 20px 24px 0; display: flex; align-items: center; justify-content: space-between; }
-  .modal-title { font-family: 'Shippori Mincho', serif; font-size: 20px; font-weight: 600; }
-  .modal-close { width: 36px; height: 36px; border: none; background: var(--warm); border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-  .modal-body { padding: 20px 24px 0; }
+.empty-state { text-align: center; padding: 60px 20px; color: var(–ink-light); grid-column: 1/-1; }
+.empty-icon { font-size: 56px; margin-bottom: 16px; }
+.empty-text { font-family: ‘Shippori Mincho’, serif; font-size: 18px; margin-bottom: 8px; }
 
-  .form-group { margin-bottom: 18px; }
-  .form-label { display: block; font-size: 13px; font-weight: 700; color: var(--ink-light); margin-bottom: 6px; }
-  .form-input, .form-textarea, .form-select { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px; background: white; font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; color: var(--ink); outline: none; }
-  .form-textarea { resize: vertical; min-height: 80px; }
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 10000; align-items: flex-end; justify-content: center; }
+.modal-overlay.open { display: flex; }
+.modal { background: var(–cream); border-radius: 24px 24px 0 0; width: 100%; max-width: 600px; max-height: 92vh; overflow-y: auto; padding: 0 0 40px; }
+.modal-handle { width: 40px; height: 4px; background: var(–border); border-radius: 2px; margin: 14px auto 0; }
+.modal-header { padding: 20px 24px 0; display: flex; align-items: center; justify-content: space-between; }
+.modal-title { font-family: ‘Shippori Mincho’, serif; font-size: 20px; font-weight: 600; }
+.modal-close { width: 36px; height: 36px; border: none; background: var(–warm); border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.modal-body { padding: 20px 24px 0; }
 
-  .img-upload { border: 2px dashed var(--border); border-radius: 12px; padding: 24px; text-align: center; cursor: pointer; background: white; position: relative; }
-  .img-upload input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-  .img-upload-icon { font-size: 32px; margin-bottom: 8px; }
-  .img-upload-text { font-size: 13px; color: var(--ink-light); }
-  .img-preview { width: 100%; height: 160px; object-fit: cover; border-radius: 10px; margin-top: 10px; display: none; }
+.form-group { margin-bottom: 18px; }
+.form-label { display: block; font-size: 13px; font-weight: 700; color: var(–ink-light); margin-bottom: 6px; }
+.form-input, .form-textarea, .form-select { width: 100%; padding: 12px 14px; border: 1.5px solid var(–border); border-radius: 10px; background: white; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 14px; color: var(–ink); outline: none; }
+.form-textarea { resize: vertical; min-height: 100px; }
 
-  .sub-imgs-upload { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-  .sub-img-thumb { position: relative; width: 80px; height: 80px; border-radius: 8px; overflow: hidden; border: 1.5px solid var(--border); flex-shrink: 0; }
-  .sub-img-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .sub-img-remove { position: absolute; top: 2px; right: 2px; width: 20px; height: 20px; background: rgba(192,57,43,0.85); color: white; border: none; border-radius: 50%; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-  .sub-img-add { width: 80px; height: 80px; border: 2px dashed var(--border); border-radius: 8px; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; color: var(--ink-light); position: relative; flex-shrink: 0; }
-  .sub-img-add input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-  .sub-img-add-label { font-size: 10px; margin-top: 2px; }
+.url-hint { font-size: 11px; color: var(–ink-light); margin-top: 5px; }
 
-  .servings-ctrl { display: flex; align-items: center; gap: 12px; }
-  .servings-btn { width: 32px; height: 32px; border: 1.5px solid var(--border); border-radius: 50%; background: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-  .servings-num { font-family: 'Shippori Mincho', serif; font-size: 22px; font-weight: 600; min-width: 24px; text-align: center; }
-  .servings-label { font-size: 13px; color: var(--ink-light); }
+.servings-ctrl { display: flex; align-items: center; gap: 12px; }
+.servings-btn { width: 32px; height: 32px; border: 1.5px solid var(–border); border-radius: 50%; background: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.servings-num { font-family: ‘Shippori Mincho’, serif; font-size: 22px; font-weight: 600; min-width: 24px; text-align: center; }
+.servings-label { font-size: 13px; color: var(–ink-light); }
 
-  .ingredient-list { display: flex; flex-direction: column; gap: 8px; }
-  .ingredient-row { display: grid; grid-template-columns: 1fr auto auto; gap: 8px; align-items: center; }
-  .ingredient-row input { padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; background: white; color: var(--ink); outline: none; width: 100%; }
-  .ingredient-row input.amount { width: 80px; }
-  .remove-ing { width: 28px; height: 28px; border: none; background: #fde; border-radius: 6px; color: var(--accent); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .add-ing-btn { margin-top: 8px; padding: 8px 14px; border: 1.5px dashed var(--border); border-radius: 8px; background: none; font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; color: var(--ink-light); cursor: pointer; width: 100%; }
+.ingredient-list { display: flex; flex-direction: column; gap: 8px; }
+.ingredient-row { display: grid; grid-template-columns: 1fr auto auto; gap: 8px; align-items: center; }
+.ingredient-row input { padding: 9px 12px; border: 1.5px solid var(–border); border-radius: 8px; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 13px; background: white; color: var(–ink); outline: none; width: 100%; }
+.ingredient-row input.amount { width: 80px; }
+.remove-ing { width: 28px; height: 28px; border: none; background: #fde; border-radius: 6px; color: var(–accent); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.add-ing-btn { margin-top: 8px; padding: 8px 14px; border: 1.5px dashed var(–border); border-radius: 8px; background: none; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 13px; color: var(–ink-light); cursor: pointer; width: 100%; }
 
-  .tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 10px; background: white; min-height: 44px; cursor: text; }
-  .tag-item { display: flex; align-items: center; gap: 4px; background: #e8f0fe; color: #3a6ad4; padding: 3px 8px 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
-  .tag-remove { border: none; background: none; cursor: pointer; color: #3a6ad4; font-size: 14px; padding: 0; }
-  .tags-input { border: none; outline: none; font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; min-width: 80px; flex: 1; background: transparent; color: var(--ink); }
+.tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 12px; border: 1.5px solid var(–border); border-radius: 10px; background: white; min-height: 44px; cursor: text; }
+.tag-item { display: flex; align-items: center; gap: 4px; background: #e8f0fe; color: #3a6ad4; padding: 3px 8px 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+.tag-remove { border: none; background: none; cursor: pointer; color: #3a6ad4; font-size: 14px; padding: 0; }
+.tags-input { border: none; outline: none; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 13px; min-width: 80px; flex: 1; background: transparent; color: var(–ink); }
 
-  .btn-submit { width: 100%; padding: 16px; background: var(--accent); color: white; border: none; border-radius: 14px; font-family: 'Shippori Mincho', serif; font-size: 17px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+.btn-submit { width: 100%; padding: 16px; background: var(–accent); color: white; border: none; border-radius: 14px; font-family: ‘Shippori Mincho’, serif; font-size: 17px; font-weight: 600; cursor: pointer; margin-top: 8px; }
 
-  .detail-image { width: 100%; height: 220px; background: var(--warm); display: flex; align-items: center; justify-content: center; font-size: 64px; color: var(--border); overflow: hidden; border-radius: 24px 24px 0 0; }
-  .detail-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .detail-body { padding: 20px 24px; }
-  .detail-title { font-family: 'Shippori Mincho', serif; font-size: 22px; font-weight: 600; margin-bottom: 10px; }
-  .detail-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 16px; }
-  .detail-url a { color: var(--accent); font-size: 13px; word-break: break-all; text-decoration: none; }
-  .section-title { font-size: 13px; font-weight: 700; color: var(--ink-light); letter-spacing: 0.06em; margin: 20px 0 10px; }
+/* Detail */
+.detail-body { padding: 24px; }
+.detail-handle { width: 40px; height: 4px; background: var(–border); border-radius: 2px; margin: 14px auto 0; }
+.detail-title { font-family: ‘Shippori Mincho’, serif; font-size: 24px; font-weight: 600; margin-bottom: 12px; line-height: 1.4; }
+.detail-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 16px; }
 
-  .scaling-bar { background: var(--paper); border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; gap: 16px; margin-bottom: 16px; border: 1.5px solid var(--warm); }
-  .scaling-label { font-size: 13px; color: var(--ink-light); flex: 1; }
+.link-btn { display: flex; align-items: center; gap: 8px; padding: 14px 18px; background: var(–accent); color: white; border-radius: 14px; text-decoration: none; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+.link-btn-icon { font-size: 18px; }
 
-  .ing-table { width: 100%; border-collapse: collapse; }
-  .ing-table td { padding: 7px 4px; font-size: 14px; border-bottom: 1px solid var(--warm); }
-  .ing-table td:last-child { text-align: right; font-weight: 500; color: var(--accent); white-space: nowrap; min-width: 80px; }
+.section-title { font-size: 13px; font-weight: 700; color: var(–ink-light); letter-spacing: 0.06em; margin: 20px 0 10px; }
 
-  .detail-memo { background: var(--paper); border-radius: 10px; padding: 14px 16px; font-size: 14px; line-height: 1.7; white-space: pre-wrap; border-left: 3px solid var(--gold); }
+.scaling-bar { background: var(–paper); border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; gap: 16px; margin-bottom: 16px; border: 1.5px solid var(–warm); }
+.scaling-label { font-size: 13px; color: var(–ink-light); flex: 1; }
 
-  .sub-gallery { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; margin-top: 10px; }
-  .sub-gallery::-webkit-scrollbar { display: none; }
-  .sub-gallery-img { width: 120px; height: 120px; object-fit: cover; border-radius: 10px; flex-shrink: 0; cursor: pointer; border: 1.5px solid var(--border); display: block; }
+.ing-table { width: 100%; border-collapse: collapse; }
+.ing-table td { padding: 7px 4px; font-size: 14px; border-bottom: 1px solid var(–warm); }
+.ing-table td:last-child { text-align: right; font-weight: 500; color: var(–accent); white-space: nowrap; min-width: 80px; }
 
-  .detail-actions { display: flex; gap: 10px; margin-top: 24px; }
-  .btn-edit { flex: 1; padding: 13px; background: var(--ink); color: white; border: none; border-radius: 12px; font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; cursor: pointer; }
-  .btn-delete { padding: 13px 20px; background: white; color: var(--accent); border: 1.5px solid var(--accent); border-radius: 12px; font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; cursor: pointer; }
+.detail-memo { background: var(–paper); border-radius: 10px; padding: 14px 16px; font-size: 14px; line-height: 1.7; white-space: pre-wrap; border-left: 3px solid var(–gold); }
 
-  .section-count { font-size: 13px; color: var(--ink-light); }
+.detail-actions { display: flex; gap: 10px; margin-top: 24px; }
+.btn-edit { flex: 1; padding: 13px; background: var(–ink); color: white; border: none; border-radius: 12px; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 14px; cursor: pointer; }
+.btn-delete { padding: 13px 20px; background: white; color: var(–accent); border: 1.5px solid var(–accent); border-radius: 12px; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 14px; cursor: pointer; }
 
-  .lightbox { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.92); z-index: 20000; align-items: center; justify-content: center; }
-  .lightbox.open { display: flex; }
-  .lightbox img { max-width: 95vw; max-height: 88vh; border-radius: 12px; object-fit: contain; }
-  .lightbox-close { position: fixed; top: 20px; right: 20px; width: 40px; height: 40px; background: rgba(255,255,255,0.15); border: none; border-radius: 50%; color: white; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.section-count { font-size: 13px; color: var(–ink-light); }
 </style>
+
 </head>
 <body>
 
@@ -162,13 +145,14 @@
     <button class="filter-chip" data-cat="デザート">デザート</button>
     <button class="filter-chip" data-cat="その他">その他</button>
   </div>
-  <div style="padding: 16px 0 6px;"><span class="section-count" id="recipeCount"></span></div>
+  <div style="padding: 12px 0 4px;"><span class="section-count" id="recipeCount"></span></div>
   <div class="recipes-grid" id="recipesGrid"></div>
 </div>
 
 <button class="fab" id="addBtn">＋</button>
 
 <!-- Add/Edit Modal -->
+
 <div class="modal-overlay" id="addModal">
   <div class="modal">
     <div class="modal-handle"></div>
@@ -179,40 +163,26 @@
     <div class="modal-body">
       <div class="form-group">
         <label class="form-label">料理名 *</label>
-        <input class="form-input" id="fName" placeholder="例：ふわとろ親子丼">
+        <input class="form-input" id="fName" placeholder="例：ねぎ塩豚ひき炒飯">
       </div>
       <div class="form-group">
         <label class="form-label">カテゴリ</label>
         <select class="form-select" id="fCat">
           <option value="">選択してください</option>
-          <option value="和食">和食</option><option value="洋食">洋食</option>
-          <option value="中華">中華</option><option value="イタリアン">イタリアン</option>
-          <option value="スープ">スープ</option><option value="おつまみ">おつまみ</option>
-          <option value="デザート">デザート</option><option value="その他">その他</option>
+          <option value="和食">和食</option>
+          <option value="洋食">洋食</option>
+          <option value="中華">中華</option>
+          <option value="イタリアン">イタリアン</option>
+          <option value="スープ">スープ</option>
+          <option value="おつまみ">おつまみ</option>
+          <option value="デザート">デザート</option>
+          <option value="その他">その他</option>
         </select>
       </div>
       <div class="form-group">
-        <label class="form-label">元のレシピのURL</label>
+        <label class="form-label">レシピのURL（インスタ・クックパッドなど）</label>
         <input class="form-input" id="fUrl" type="url" placeholder="https://...">
-      </div>
-      <div class="form-group">
-        <label class="form-label">メイン写真（完成写真）</label>
-        <div class="img-upload">
-          <input type="file" accept="image/*" id="imgFile">
-          <div class="img-upload-icon">📷</div>
-          <div class="img-upload-text">タップして写真を選択</div>
-          <img class="img-preview" id="imgPreview">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">サブ写真（工程・スクショなど複数OK）</label>
-        <div class="sub-imgs-upload" id="subImgsWrap">
-          <div class="sub-img-add" id="subImgAddBtn">
-            <input type="file" accept="image/*" multiple id="subImgFile">
-            <span>＋</span>
-            <span class="sub-img-add-label">追加</span>
-          </div>
-        </div>
+        <div class="url-hint">インスタの投稿URLもそのまま貼れます</div>
       </div>
       <div class="form-group">
         <label class="form-label">何人前のレシピ？</label>
@@ -244,16 +214,14 @@
 </div>
 
 <!-- Detail Modal -->
+
 <div class="modal-overlay" id="detailModal">
   <div class="modal">
-    <div class="modal-handle"></div>
-    <div id="detailImageWrap" class="detail-image">🍽️</div>
+    <div class="detail-handle"></div>
     <div class="detail-body">
       <div class="detail-title" id="detailTitle"></div>
       <div class="detail-tags" id="detailTags"></div>
-      <div class="detail-url" id="detailUrl"></div>
-      <div class="section-title">📸 サブ写真</div>
-      <div class="sub-gallery" id="detailSubGallery"></div>
+      <div id="detailLinkWrap"></div>
       <div class="section-title">🧂 材料</div>
       <div class="scaling-bar">
         <span class="scaling-label">何人前で表示？</span>
@@ -273,18 +241,12 @@
   </div>
 </div>
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose">✕</button>
-  <img id="lightboxImg" src="" alt="">
-</div>
-
 <script>
-const STORAGE_KEY = 'recipe_collection_v1';
+const STORAGE_KEY = 'recipe_collection_v2';
 let recipes = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
 let currentFilter = 'all', searchQuery = '', editingId = null, viewingRecipe = null;
 let scaleServings = 4, formServings = 2;
-let formTags = [], formIngredients = [], formSubImages = [], imgDataUrl = null;
+let formTags = [], formIngredients = [];
 
 function openModal(id) {
   document.getElementById('mainContainer').style.display = 'none';
@@ -299,6 +261,16 @@ function closeModal(id) {
   }
 }
 
+function getLinkLabel(url) {
+  if (!url) return '元のレシピを見る';
+  if (url.includes('instagram.com')) return 'Instagramで見る';
+  if (url.includes('cookpad.com')) return 'クックパッドで見る';
+  if (url.includes('kurashiru.com')) return 'クラシルで見る';
+  if (url.includes('delishkitchen.tv')) return 'DELISH KITCHENで見る';
+  if (url.includes('youtube.com') || url.includes('youtu.be')) return 'YouTubeで見る';
+  return '元のレシピを見る';
+}
+
 function render() {
   let list = recipes.slice();
   if (currentFilter === 'fav') list = list.filter(r => r.fav);
@@ -311,24 +283,26 @@ function render() {
   document.getElementById('recipeCount').textContent = list.length + '品のレシピ';
   const grid = document.getElementById('recipesGrid');
   if (list.length === 0) {
-    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🥣</div><div class="empty-text">${recipes.length===0?'まだレシピがありません':'該当するレシピがありません'}</div></div>`;
+    grid.innerHTML = `<div class="empty-state"><div class="empty-icon">🥣</div><div class="empty-text">${recipes.length===0?'まだレシピがありません':'該当するレシピがありません'}</div></div>`;
     return;
   }
   grid.innerHTML = list.map(r => `
     <div class="recipe-card" data-id="${r.id}">
-      <div class="card-image">${r.image?`<img src="${r.image}" alt="">`:'🍽️'}</div>
-      <button class="fav-btn" data-fav="${r.id}">${r.fav?'⭐':'☆'}</button>
-      <div class="card-body">
+      <div class="card-header">
         <div class="card-title">${r.name}</div>
-        <div class="card-tags">
-          ${r.category?`<span class="tag tag-cat">${r.category}</span>`:''}
-          ${(r.tags||[]).slice(0,3).map(t=>`<span class="tag tag-custom">${t}</span>`).join('')}
-        </div>
-        <div class="card-meta">${r.servings?`📋 ${r.servings}人前基準`:''}</div>
+        <button class="fav-btn" data-fav="${r.id}">${r.fav?'⭐':'☆'}</button>
+      </div>
+      <div class="card-tags">
+        ${r.category?`<span class="tag tag-cat">${r.category}</span>`:''}
+        ${(r.tags||[]).slice(0,3).map(t=>`<span class="tag tag-custom">${t}</span>`).join('')}
+      </div>
+      <div class="card-meta">
+        ${r.servings?`<span>📋 ${r.servings}人前基準</span>`:''}
+        ${r.url?`<a class="card-link" href="${r.url}" target="_blank" onclick="event.stopPropagation()">🔗 ${getLinkLabel(r.url)}</a>`:''}
       </div>
     </div>`).join('');
   grid.querySelectorAll('.recipe-card').forEach(card => {
-    card.addEventListener('click', e => { if(e.target.closest('.fav-btn')) return; openDetail(card.dataset.id); });
+    card.addEventListener('click', e => { if(e.target.closest('.fav-btn')||e.target.closest('.card-link')) return; openDetail(card.dataset.id); });
   });
   grid.querySelectorAll('.fav-btn').forEach(btn => {
     btn.addEventListener('click', e => { e.stopPropagation(); const r=recipes.find(x=>x.id===btn.dataset.fav); if(r){r.fav=!r.fav;save();} });
@@ -352,149 +326,106 @@ function openAddModal(recipe=null) {
   document.getElementById('fMemo').value = recipe?(recipe.memo||''):'';
   formServings = recipe?(recipe.servings||2):2;
   document.getElementById('servNum').textContent = formServings;
-  imgDataUrl = recipe?(recipe.image||null):null;
-  const prev = document.getElementById('imgPreview');
-  if(imgDataUrl){prev.src=imgDataUrl;prev.style.display='block';}else{prev.style.display='none';prev.src='';}
   formTags = recipe?[...(recipe.tags||[])]:[];
-  formSubImages = recipe?[...(recipe.subImages||[])]:[];
   formIngredients = recipe?(recipe.ingredients||[]).map(i=>({...i})):[];
   if(formIngredients.length===0) formIngredients=[{name:'',amount:''}];
-  renderTags(); renderSubImages(); renderIngredients();
+  renderTags(); renderIngredients();
   openModal('addModal');
 }
 
 document.getElementById('addBtn').addEventListener('click', ()=>openAddModal());
 document.getElementById('closeAdd').addEventListener('click', ()=>closeModal('addModal'));
-document.getElementById('addModal').addEventListener('click', e=>{if(e.target===document.getElementById('addModal'))closeModal('addModal');});
-document.getElementById('servDec').addEventListener('click', ()=>{if(formServings>1){formServings--;document.getElementById('servNum').textContent=formServings;}});
-document.getElementById('servInc').addEventListener('click', ()=>{formServings++;document.getElementById('servNum').textContent=formServings;});
-
-// 画像圧縮
-function compressImage(dataUrl, maxWidth=800, quality=0.7) {
-  return new Promise(resolve => {
-    const img = new Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      let w = img.width, h = img.height;
-      if (w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
-      canvas.width = w; canvas.height = h;
-      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      resolve(canvas.toDataURL('image/jpeg', quality));
-    };
-    img.src = dataUrl;
-  });
-}
-
-document.getElementById('imgFile').addEventListener('change', async e=>{
-  const file=e.target.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=async ev=>{
-    imgDataUrl=await compressImage(ev.target.result);
-    const p=document.getElementById('imgPreview');p.src=imgDataUrl;p.style.display='block';
-  };
-  reader.readAsDataURL(file);
-});
-document.getElementById('subImgFile').addEventListener('change', async e=>{
-  for(const file of Array.from(e.target.files)){
-    const reader=new FileReader();
-    await new Promise(res=>{
-      reader.onload=async ev=>{
-        formSubImages.push(await compressImage(ev.target.result, 600, 0.6));
-        renderSubImages();res();
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-  e.target.value='';
-});
-
-function renderSubImages() {
-  const wrap=document.getElementById('subImgsWrap'), addBtn=document.getElementById('subImgAddBtn');
-  wrap.innerHTML='';
-  formSubImages.forEach((src,i)=>{
-    const thumb=document.createElement('div');thumb.className='sub-img-thumb';
-    thumb.innerHTML=`<img src="${src}"><button class="sub-img-remove" data-i="${i}">×</button>`;
-    thumb.querySelector('.sub-img-remove').addEventListener('click',()=>{formSubImages.splice(i,1);renderSubImages();});
-    wrap.appendChild(thumb);
-  });
-  wrap.appendChild(addBtn);
-}
+document.getElementById('addModal').addEventListener('click', e=>{ if(e.target===document.getElementById('addModal')) closeModal('addModal'); });
+document.getElementById('servDec').addEventListener('click', ()=>{ if(formServings>1){formServings--;document.getElementById('servNum').textContent=formServings;} });
+document.getElementById('servInc').addEventListener('click', ()=>{ formServings++;document.getElementById('servNum').textContent=formServings; });
 
 function renderTags() {
-  const wrap=document.getElementById('tagsWrap');wrap.innerHTML='';
+  const wrap=document.getElementById('tagsWrap'); wrap.innerHTML='';
   formTags.forEach((t,i)=>{
-    const el=document.createElement('span');el.className='tag-item';
-    el.innerHTML=`${t}<button class="tag-remove" data-i="${i}">×</button>`;
-    el.querySelector('.tag-remove').addEventListener('click',()=>{formTags.splice(i,1);renderTags();});
+    const el=document.createElement('span'); el.className='tag-item';
+    el.innerHTML=`${t}<button class="tag-remove">×</button>`;
+    el.querySelector('.tag-remove').addEventListener('click',()=>{ formTags.splice(i,1); renderTags(); });
     wrap.appendChild(el);
   });
-  const input=document.createElement('input');input.className='tags-input';input.id='tagInput';
+  const input=document.createElement('input'); input.className='tags-input'; input.id='tagInput';
   input.placeholder=formTags.length?'':'例：簡単、子ども好き';
   input.addEventListener('keydown',e=>{
-    if((e.key==='Enter'||e.key===',')&&input.value.trim()){e.preventDefault();formTags.push(input.value.trim());renderTags();}
-    if(e.key==='Backspace'&&!input.value&&formTags.length){formTags.pop();renderTags();}
+    if((e.key==='Enter'||e.key===',')&&input.value.trim()){ e.preventDefault(); formTags.push(input.value.trim()); renderTags(); }
+    if(e.key==='Backspace'&&!input.value&&formTags.length){ formTags.pop(); renderTags(); }
   });
-  wrap.appendChild(input);wrap.addEventListener('click',()=>input.focus());
+  wrap.appendChild(input); wrap.addEventListener('click',()=>input.focus());
 }
 
 function renderIngredients() {
-  const list=document.getElementById('ingList');list.innerHTML='';
+  const list=document.getElementById('ingList'); list.innerHTML='';
   formIngredients.forEach((ing,i)=>{
-    const row=document.createElement('div');row.className='ingredient-row';
-    row.innerHTML=`<input type="text" placeholder="材料名" value="${ing.name}" data-field="name" data-i="${i}"><input type="text" class="amount" placeholder="量" value="${ing.amount}" data-field="amount" data-i="${i}"><button class="remove-ing" data-i="${i}">×</button>`;
-    row.querySelectorAll('input').forEach(inp=>inp.addEventListener('input',()=>{formIngredients[inp.dataset.i][inp.dataset.field]=inp.value;}));
-    row.querySelector('.remove-ing').addEventListener('click',()=>{formIngredients.splice(i,1);if(formIngredients.length===0)formIngredients=[{name:'',amount:''}];renderIngredients();});
+    const row=document.createElement('div'); row.className='ingredient-row';
+    row.innerHTML=`<input type="text" placeholder="材料名" value="${ing.name}" data-field="name" data-i="${i}"><input type="text" class="amount" placeholder="量" value="${ing.amount}" data-field="amount" data-i="${i}"><button class="remove-ing">×</button>`;
+    row.querySelectorAll('input').forEach(inp=>inp.addEventListener('input',()=>{ formIngredients[inp.dataset.i][inp.dataset.field]=inp.value; }));
+    row.querySelector('.remove-ing').addEventListener('click',()=>{ formIngredients.splice(i,1); if(formIngredients.length===0)formIngredients=[{name:'',amount:''}]; renderIngredients(); });
     list.appendChild(row);
   });
 }
-document.getElementById('addIngBtn').addEventListener('click',()=>{formIngredients.push({name:'',amount:''});renderIngredients();document.getElementById('ingList').lastElementChild?.querySelector('input')?.focus();});
+document.getElementById('addIngBtn').addEventListener('click',()=>{ formIngredients.push({name:'',amount:''}); renderIngredients(); document.getElementById('ingList').lastElementChild?.querySelector('input')?.focus(); });
 
 document.getElementById('saveBtn').addEventListener('click',()=>{
-  const name=document.getElementById('fName').value.trim();if(!name){alert('料理名を入力してください');return;}
-  const recipe={id:editingId||Date.now().toString(),name,category:document.getElementById('fCat').value,url:document.getElementById('fUrl').value.trim(),memo:document.getElementById('fMemo').value.trim(),servings:formServings,ingredients:formIngredients.filter(i=>i.name.trim()),tags:formTags,image:imgDataUrl,subImages:formSubImages,fav:false,createdAt:Date.now()};
-  try {
-    if(editingId){const idx=recipes.findIndex(r=>r.id===editingId);if(idx!==-1){recipe.fav=recipes[idx].fav;recipe.createdAt=recipes[idx].createdAt;recipes[idx]=recipe;}}
-    else{recipes.unshift(recipe);}
-    save();closeModal('addModal');
-  } catch(e) {
-    alert('保存できませんでした。写真を減らすか、設定→Safari→詳細→Webサイトデータからサイトのデータを削除してみてください。');
+  const name=document.getElementById('fName').value.trim();
+  if(!name){ alert('料理名を入力してください'); return; }
+  const recipe={
+    id: editingId||Date.now().toString(),
+    name,
+    category: document.getElementById('fCat').value,
+    url: document.getElementById('fUrl').value.trim(),
+    memo: document.getElementById('fMemo').value.trim(),
+    servings: formServings,
+    ingredients: formIngredients.filter(i=>i.name.trim()),
+    tags: formTags,
+    fav: false,
+    createdAt: Date.now()
+  };
+  if(editingId){
+    const idx=recipes.findIndex(r=>r.id===editingId);
+    if(idx!==-1){ recipe.fav=recipes[idx].fav; recipe.createdAt=recipes[idx].createdAt; recipes[idx]=recipe; }
+  } else {
+    recipes.unshift(recipe);
   }
+  save();
+  closeModal('addModal');
 });
 
 function openDetail(id) {
-  viewingRecipe=recipes.find(r=>r.id===id);if(!viewingRecipe)return;
-  scaleServings=4;renderDetail();openModal('detailModal');
+  viewingRecipe=recipes.find(r=>r.id===id); if(!viewingRecipe) return;
+  scaleServings=4; renderDetail(); openModal('detailModal');
 }
 function renderDetail() {
   const r=viewingRecipe;
   document.getElementById('scaleNum').textContent=scaleServings;
-  document.getElementById('detailImageWrap').innerHTML=r.image?`<img src="${r.image}" alt="">`:'🍽️';
   document.getElementById('detailTitle').textContent=r.name;
-  let th='';if(r.category)th+=`<span class="tag tag-cat">${r.category}</span>`;(r.tags||[]).forEach(t=>{th+=`<span class="tag tag-custom">${t}</span>`;});
+  let th=''; if(r.category) th+=`<span class="tag tag-cat">${r.category}</span>`; (r.tags||[]).forEach(t=>{ th+=`<span class="tag tag-custom">${t}</span>`; });
   document.getElementById('detailTags').innerHTML=th;
-  document.getElementById('detailUrl').innerHTML=r.url?`<a href="${r.url}" target="_blank">🔗 元のレシピを見る</a>`:'';
-  const gallery=document.getElementById('detailSubGallery'),subs=r.subImages||[];
-  if(subs.length===0){gallery.innerHTML='<span style="font-size:13px;color:var(--ink-light)">サブ写真なし</span>';}
-  else{gallery.innerHTML=subs.map(src=>`<img class="sub-gallery-img" src="${src}" alt="">`).join('');gallery.querySelectorAll('.sub-gallery-img').forEach(img=>img.addEventListener('click',()=>openLightbox(img.src)));}
+  document.getElementById('detailLinkWrap').innerHTML=r.url?`<a class="link-btn" href="${r.url}" target="_blank"><span class="link-btn-icon">🔗</span>${getLinkLabel(r.url)}</a>`:'';
   const ratio=scaleServings/(r.servings||2);
   let thtml=(r.ingredients||[]).map(ing=>`<tr><td>${ing.name}</td><td>${scaleAmount(ing.amount,ratio)}</td></tr>`).join('');
-  if(!thtml)thtml=`<tr><td colspan="2" style="color:var(--ink-light);font-size:13px;">材料が登録されていません</td></tr>`;
+  if(!thtml) thtml=`<tr><td colspan="2" style="color:var(--ink-light);font-size:13px;">材料が登録されていません</td></tr>`;
   document.getElementById('ingTable').innerHTML=thtml;
-  const memo=document.getElementById('detailMemo');memo.textContent=r.memo||'メモなし';memo.style.color=r.memo?'var(--ink)':'var(--ink-light)';
+  const memo=document.getElementById('detailMemo'); memo.textContent=r.memo||'メモなし'; memo.style.color=r.memo?'var(--ink)':'var(--ink-light)';
 }
-function scaleAmount(str,ratio){if(!str)return'';return str.replace(/[\d.]+/g,m=>{const n=parseFloat(m);if(isNaN(n))return m;const s=n*ratio;return s===Math.floor(s)?s.toString():(Math.round(s*10)/10)+'';});}
+function scaleAmount(str,ratio){
+  if(!str) return '';
+  return str.replace(/[\d.]+/g,m=>{ const n=parseFloat(m); if(isNaN(n)) return m; const s=n*ratio; return s===Math.floor(s)?s.toString():(Math.round(s*10)/10)+''; });
+}
 
-document.getElementById('scaleDec').addEventListener('click',()=>{if(scaleServings>1){scaleServings--;renderDetail();}});
-document.getElementById('scaleInc').addEventListener('click',()=>{scaleServings++;renderDetail();});
-document.getElementById('detailModal').addEventListener('click',e=>{if(e.target===document.getElementById('detailModal'))closeModal('detailModal');});
-document.getElementById('editBtn').addEventListener('click',()=>{closeModal('detailModal');openAddModal(viewingRecipe);});
-document.getElementById('deleteBtn').addEventListener('click',()=>{if(!confirm(`「${viewingRecipe.name}」を削除しますか？`))return;recipes=recipes.filter(r=>r.id!==viewingRecipe.id);save();closeModal('detailModal');});
+document.getElementById('scaleDec').addEventListener('click',()=>{ if(scaleServings>1){scaleServings--;renderDetail();} });
+document.getElementById('scaleInc').addEventListener('click',()=>{ scaleServings++;renderDetail(); });
+document.getElementById('detailModal').addEventListener('click',e=>{ if(e.target===document.getElementById('detailModal')) closeModal('detailModal'); });
+document.getElementById('editBtn').addEventListener('click',()=>{ closeModal('detailModal'); openAddModal(viewingRecipe); });
+document.getElementById('deleteBtn').addEventListener('click',()=>{
+  if(!confirm(`「${viewingRecipe.name}」を削除しますか？`)) return;
+  recipes=recipes.filter(r=>r.id!==viewingRecipe.id); save(); closeModal('detailModal');
+});
 
-function openLightbox(src){document.getElementById('lightboxImg').src=src;document.getElementById('lightbox').classList.add('open');}
-document.getElementById('lightboxClose').addEventListener('click',()=>document.getElementById('lightbox').classList.remove('open'));
-document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))document.getElementById('lightbox').classList.remove('open');});
-
-renderTags();renderIngredients();renderSubImages();render();
+renderTags(); renderIngredients(); render();
 </script>
+
 </body>
 </html>
