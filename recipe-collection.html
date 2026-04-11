@@ -22,29 +22,34 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Zen Maru Gothic', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; }
 
-header { background: var(–ink); padding: 20px 24px 16px; display: flex; align-items: center; justify-content: space-between; }
-.logo { font-family: ‘Shippori Mincho’, serif; font-size: 22px; color: var(–cream); letter-spacing: 0.08em; display: flex; align-items: center; gap: 10px; }
+/* ページ切り替え */
+.page { display: none; min-height: 100vh; }
+.page.active { display: block; }
+
+/* ヘッダー共通 */
+.header { background: var(–ink); padding: 16px 20px; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 10; }
+.header-title { font-family: ‘Shippori Mincho’, serif; font-size: 20px; color: var(–cream); flex: 1; letter-spacing: 0.06em; }
 .header-count { font-size: 12px; color: #a09080; }
+.back-btn { background: none; border: none; color: var(–cream); font-size: 22px; cursor: pointer; padding: 0; line-height: 1; }
 
+/* リストページ */
 .container { max-width: 900px; margin: 0 auto; padding: 0 16px 80px; }
+.fab { position: fixed; bottom: 28px; right: 24px; width: 60px; height: 60px; background: var(–accent); color: white; border: none; border-radius: 50%; font-size: 28px; cursor: pointer; box-shadow: 0 4px 20px rgba(192,57,43,0.4); display: flex; align-items: center; justify-content: center; }
 
-.fab { position: fixed; bottom: 28px; right: 24px; width: 60px; height: 60px; background: var(–accent); color: white; border: none; border-radius: 50%; font-size: 28px; cursor: pointer; box-shadow: 0 4px 20px rgba(192,57,43,0.4); display: flex; align-items: center; justify-content: center; z-index: 50; }
-
-.filter-bar { display: flex; gap: 8px; padding: 16px 0 12px; overflow-x: auto; scrollbar-width: none; flex-wrap: wrap; }
+.filter-bar { display: flex; gap: 8px; padding: 14px 0 10px; overflow-x: auto; scrollbar-width: none; flex-wrap: wrap; }
 .filter-bar::-webkit-scrollbar { display: none; }
 .filter-chip { padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(–border); background: white; color: var(–ink-light); font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 13px; cursor: pointer; white-space: nowrap; }
 .filter-chip.active { background: var(–ink); color: white; border-color: var(–ink); }
 
-.search-wrap { position: relative; margin-bottom: 4px; }
+.search-wrap { position: relative; padding-top: 14px; }
 .search-input { width: 100%; padding: 12px 16px 12px 40px; border: 1.5px solid var(–border); border-radius: 12px; background: white; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 14px; color: var(–ink); outline: none; }
 .search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; }
 
-.recipes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin-top: 16px; }
-
-.recipe-card { background: white; border-radius: 16px; border: 1.5px solid var(–border); cursor: pointer; position: relative; padding: 18px; }
+.recipes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin-top: 14px; }
+.recipe-card { background: white; border-radius: 16px; border: 1.5px solid var(–border); cursor: pointer; padding: 18px; }
 .card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; gap: 8px; }
 .card-title { font-family: ‘Shippori Mincho’, serif; font-size: 17px; font-weight: 600; line-height: 1.4; flex: 1; }
-.fav-btn { background: none; border: none; font-size: 20px; cursor: pointer; flex-shrink: 0; padding: 0; line-height: 1; }
+.fav-btn { background: none; border: none; font-size: 20px; cursor: pointer; flex-shrink: 0; padding: 0; }
 .card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
 .tag { padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; }
 .tag-cat { background: var(–green-soft); color: var(–green); }
@@ -55,188 +60,175 @@ header { background: var(–ink); padding: 20px 24px 16px; display: flex; align-
 .empty-state { text-align: center; padding: 60px 20px; color: var(–ink-light); grid-column: 1/-1; }
 .empty-icon { font-size: 56px; margin-bottom: 16px; }
 .empty-text { font-family: ‘Shippori Mincho’, serif; font-size: 18px; margin-bottom: 8px; }
+.section-count { font-size: 13px; color: var(–ink-light); display: block; padding: 10px 0 4px; }
 
-.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 10000; align-items: flex-end; justify-content: center; }
-.modal-overlay.open { display: flex; }
-.modal { background: var(–cream); border-radius: 24px 24px 0 0; width: 100%; max-width: 600px; max-height: 92vh; overflow-y: auto; padding: 0 0 40px; }
-.modal-handle { width: 40px; height: 4px; background: var(–border); border-radius: 2px; margin: 14px auto 0; }
-.modal-header { padding: 20px 24px 0; display: flex; align-items: center; justify-content: space-between; }
-.modal-title { font-family: ‘Shippori Mincho’, serif; font-size: 20px; font-weight: 600; }
-.modal-close { width: 36px; height: 36px; border: none; background: var(–warm); border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.modal-body { padding: 20px 24px 0; }
+/* フォームページ・詳細ページ共通 */
+.page-body { max-width: 600px; margin: 0 auto; padding: 20px 20px 60px; }
 
-.form-group { margin-bottom: 18px; }
+.form-group { margin-bottom: 20px; }
 .form-label { display: block; font-size: 13px; font-weight: 700; color: var(–ink-light); margin-bottom: 6px; }
-.form-input, .form-textarea, .form-select { width: 100%; padding: 12px 14px; border: 1.5px solid var(–border); border-radius: 10px; background: white; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 14px; color: var(–ink); outline: none; }
+.form-input, .form-textarea, .form-select { width: 100%; padding: 12px 14px; border: 1.5px solid var(–border); border-radius: 10px; background: white; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 14px; color: var(–ink); outline: none; -webkit-appearance: none; }
 .form-textarea { resize: vertical; min-height: 100px; }
-
 .url-hint { font-size: 11px; color: var(–ink-light); margin-top: 5px; }
 
 .servings-ctrl { display: flex; align-items: center; gap: 12px; }
-.servings-btn { width: 32px; height: 32px; border: 1.5px solid var(–border); border-radius: 50%; background: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.servings-num { font-family: ‘Shippori Mincho’, serif; font-size: 22px; font-weight: 600; min-width: 24px; text-align: center; }
+.servings-btn { width: 36px; height: 36px; border: 1.5px solid var(–border); border-radius: 50%; background: white; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.servings-num { font-family: ‘Shippori Mincho’, serif; font-size: 24px; font-weight: 600; min-width: 28px; text-align: center; }
 .servings-label { font-size: 13px; color: var(–ink-light); }
 
-.ingredient-list { display: flex; flex-direction: column; gap: 8px; }
-.ingredient-row { display: grid; grid-template-columns: 1fr auto auto; gap: 8px; align-items: center; }
-.ingredient-row input { padding: 9px 12px; border: 1.5px solid var(–border); border-radius: 8px; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 13px; background: white; color: var(–ink); outline: none; width: 100%; }
-.ingredient-row input.amount { width: 80px; }
-.remove-ing { width: 28px; height: 28px; border: none; background: #fde; border-radius: 6px; color: var(–accent); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.add-ing-btn { margin-top: 8px; padding: 8px 14px; border: 1.5px dashed var(–border); border-radius: 8px; background: none; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 13px; color: var(–ink-light); cursor: pointer; width: 100%; }
+.ingredient-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+.ingredient-row { display: grid; grid-template-columns: 1fr 100px 36px; gap: 8px; align-items: center; }
+.ingredient-row input { padding: 10px 12px; border: 1.5px solid var(–border); border-radius: 8px; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 14px; background: white; color: var(–ink); outline: none; width: 100%; }
+.remove-ing { width: 36px; height: 36px; border: none; background: #fde; border-radius: 8px; color: var(–accent); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.add-ing-btn { padding: 10px 14px; border: 1.5px dashed var(–border); border-radius: 8px; background: none; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 13px; color: var(–ink-light); cursor: pointer; width: 100%; }
 
-.tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 12px; border: 1.5px solid var(–border); border-radius: 10px; background: white; min-height: 44px; cursor: text; }
-.tag-item { display: flex; align-items: center; gap: 4px; background: #e8f0fe; color: #3a6ad4; padding: 3px 8px 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
-.tag-remove { border: none; background: none; cursor: pointer; color: #3a6ad4; font-size: 14px; padding: 0; }
-.tags-input { border: none; outline: none; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 13px; min-width: 80px; flex: 1; background: transparent; color: var(–ink); }
+.tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 12px; border: 1.5px solid var(–border); border-radius: 10px; background: white; min-height: 48px; cursor: text; }
+.tag-item { display: flex; align-items: center; gap: 4px; background: #e8f0fe; color: #3a6ad4; padding: 4px 10px 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 500; }
+.tag-remove { border: none; background: none; cursor: pointer; color: #3a6ad4; font-size: 16px; padding: 0; line-height: 1; }
+.tags-input { border: none; outline: none; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 14px; min-width: 80px; flex: 1; background: transparent; color: var(–ink); }
 
-.btn-submit { width: 100%; padding: 16px; background: var(–accent); color: white; border: none; border-radius: 14px; font-family: ‘Shippori Mincho’, serif; font-size: 17px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+.btn-save { width: 100%; padding: 16px; background: var(–accent); color: white; border: none; border-radius: 14px; font-family: ‘Shippori Mincho’, serif; font-size: 17px; font-weight: 600; cursor: pointer; margin-top: 8px; }
 
-/* Detail */
-.detail-body { padding: 24px; }
-.detail-handle { width: 40px; height: 4px; background: var(–border); border-radius: 2px; margin: 14px auto 0; }
-.detail-title { font-family: ‘Shippori Mincho’, serif; font-size: 24px; font-weight: 600; margin-bottom: 12px; line-height: 1.4; }
-.detail-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 16px; }
+/* 詳細ページ */
+.detail-title { font-family: ‘Shippori Mincho’, serif; font-size: 26px; font-weight: 600; margin-bottom: 12px; line-height: 1.4; }
+.detail-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
 
-.link-btn { display: flex; align-items: center; gap: 8px; padding: 14px 18px; background: var(–accent); color: white; border-radius: 14px; text-decoration: none; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 15px; font-weight: 500; margin-bottom: 8px; }
-.link-btn-icon { font-size: 18px; }
+.link-btn { display: flex; align-items: center; gap: 10px; padding: 16px 20px; background: var(–accent); color: white; border-radius: 14px; text-decoration: none; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 15px; font-weight: 500; margin-bottom: 24px; }
 
-.section-title { font-size: 13px; font-weight: 700; color: var(–ink-light); letter-spacing: 0.06em; margin: 20px 0 10px; }
+.section-title { font-size: 13px; font-weight: 700; color: var(–ink-light); letter-spacing: 0.06em; margin: 24px 0 12px; text-transform: uppercase; }
 
 .scaling-bar { background: var(–paper); border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; gap: 16px; margin-bottom: 16px; border: 1.5px solid var(–warm); }
 .scaling-label { font-size: 13px; color: var(–ink-light); flex: 1; }
 
-.ing-table { width: 100%; border-collapse: collapse; }
-.ing-table td { padding: 7px 4px; font-size: 14px; border-bottom: 1px solid var(–warm); }
-.ing-table td:last-child { text-align: right; font-weight: 500; color: var(–accent); white-space: nowrap; min-width: 80px; }
+.ing-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+.ing-table td { padding: 9px 4px; font-size: 15px; border-bottom: 1px solid var(–warm); }
+.ing-table td:last-child { text-align: right; font-weight: 600; color: var(–accent); white-space: nowrap; min-width: 80px; }
 
-.detail-memo { background: var(–paper); border-radius: 10px; padding: 14px 16px; font-size: 14px; line-height: 1.7; white-space: pre-wrap; border-left: 3px solid var(–gold); }
+.detail-memo { background: var(–paper); border-radius: 12px; padding: 16px 18px; font-size: 14px; line-height: 1.8; white-space: pre-wrap; border-left: 3px solid var(–gold); }
 
-.detail-actions { display: flex; gap: 10px; margin-top: 24px; }
-.btn-edit { flex: 1; padding: 13px; background: var(–ink); color: white; border: none; border-radius: 12px; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 14px; cursor: pointer; }
-.btn-delete { padding: 13px 20px; background: white; color: var(–accent); border: 1.5px solid var(–accent); border-radius: 12px; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 14px; cursor: pointer; }
-
-.section-count { font-size: 13px; color: var(–ink-light); }
+.detail-actions { display: flex; gap: 12px; margin-top: 32px; }
+.btn-edit { flex: 1; padding: 14px; background: var(–ink); color: white; border: none; border-radius: 12px; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 15px; cursor: pointer; }
+.btn-delete { padding: 14px 20px; background: white; color: var(–accent); border: 1.5px solid var(–accent); border-radius: 12px; font-family: ‘Zen Maru Gothic’, sans-serif; font-size: 15px; cursor: pointer; }
 </style>
 
 </head>
 <body>
 
-<header>
-  <div class="logo"><span>🍳</span><span>My Recipes</span></div>
-  <span class="header-count" id="headerCount">0品</span>
-</header>
+<!-- ===== LIST PAGE ===== -->
 
-<div id="mainContainer" class="container">
-  <div style="padding-top:16px;">
+<div class="page active" id="pageList">
+  <div class="header">
+    <span class="header-title">🍳 My Recipes</span>
+    <span class="header-count" id="headerCount">0品</span>
+  </div>
+  <div class="container">
     <div class="search-wrap">
       <span class="search-icon">🔍</span>
       <input class="search-input" type="text" id="searchInput" placeholder="料理名・タグで検索...">
     </div>
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-chip active" data-cat="all">すべて</button>
+      <button class="filter-chip" data-cat="fav">⭐ お気に入り</button>
+      <button class="filter-chip" data-cat="和食">和食</button>
+      <button class="filter-chip" data-cat="洋食">洋食</button>
+      <button class="filter-chip" data-cat="中華">中華</button>
+      <button class="filter-chip" data-cat="イタリアン">イタリアン</button>
+      <button class="filter-chip" data-cat="スープ">スープ</button>
+      <button class="filter-chip" data-cat="おつまみ">おつまみ</button>
+      <button class="filter-chip" data-cat="デザート">デザート</button>
+      <button class="filter-chip" data-cat="その他">その他</button>
+    </div>
+    <span class="section-count" id="recipeCount"></span>
+    <div class="recipes-grid" id="recipesGrid"></div>
   </div>
-  <div class="filter-bar" id="filterBar">
-    <button class="filter-chip active" data-cat="all">すべて</button>
-    <button class="filter-chip" data-cat="fav">⭐ お気に入り</button>
-    <button class="filter-chip" data-cat="和食">和食</button>
-    <button class="filter-chip" data-cat="洋食">洋食</button>
-    <button class="filter-chip" data-cat="中華">中華</button>
-    <button class="filter-chip" data-cat="イタリアン">イタリアン</button>
-    <button class="filter-chip" data-cat="スープ">スープ</button>
-    <button class="filter-chip" data-cat="おつまみ">おつまみ</button>
-    <button class="filter-chip" data-cat="デザート">デザート</button>
-    <button class="filter-chip" data-cat="その他">その他</button>
-  </div>
-  <div style="padding: 12px 0 4px;"><span class="section-count" id="recipeCount"></span></div>
-  <div class="recipes-grid" id="recipesGrid"></div>
+  <button class="fab" id="addBtn">＋</button>
 </div>
 
-<button class="fab" id="addBtn">＋</button>
+<!-- ===== FORM PAGE ===== -->
 
-<!-- Add/Edit Modal -->
-
-<div class="modal-overlay" id="addModal">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <div class="modal-header">
-      <span class="modal-title" id="modalTitle">レシピを追加</span>
-      <button class="modal-close" id="closeAdd">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-group">
-        <label class="form-label">料理名 *</label>
-        <input class="form-input" id="fName" placeholder="例：ねぎ塩豚ひき炒飯">
-      </div>
-      <div class="form-group">
-        <label class="form-label">カテゴリ</label>
-        <select class="form-select" id="fCat">
-          <option value="">選択してください</option>
-          <option value="和食">和食</option>
-          <option value="洋食">洋食</option>
-          <option value="中華">中華</option>
-          <option value="イタリアン">イタリアン</option>
-          <option value="スープ">スープ</option>
-          <option value="おつまみ">おつまみ</option>
-          <option value="デザート">デザート</option>
-          <option value="その他">その他</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">レシピのURL（インスタ・クックパッドなど）</label>
-        <input class="form-input" id="fUrl" type="url" placeholder="https://...">
-        <div class="url-hint">インスタの投稿URLもそのまま貼れます</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">何人前のレシピ？</label>
-        <div class="servings-ctrl">
-          <button class="servings-btn" id="servDec">−</button>
-          <span class="servings-num" id="servNum">2</span>
-          <span class="servings-label">人前</span>
-          <button class="servings-btn" id="servInc">＋</button>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">材料（数値を入れると自動スケーリング）</label>
-        <div class="ingredient-list" id="ingList"></div>
-        <button class="add-ing-btn" id="addIngBtn">＋ 材料を追加</button>
-      </div>
-      <div class="form-group">
-        <label class="form-label">作り方・メモ</label>
-        <textarea class="form-textarea" id="fMemo" placeholder="作り方のポイントや自分なりのメモなど..."></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">タグ（Enterで追加）</label>
-        <div class="tags-wrap" id="tagsWrap">
-          <input class="tags-input" id="tagInput" placeholder="例：簡単、子ども好き">
-        </div>
-      </div>
-      <button class="btn-submit" id="saveBtn">保存する</button>
-    </div>
+<div class="page" id="pageForm">
+  <div class="header">
+    <button class="back-btn" id="formBackBtn">‹</button>
+    <span class="header-title" id="formTitle">レシピを追加</span>
   </div>
-</div>
-
-<!-- Detail Modal -->
-
-<div class="modal-overlay" id="detailModal">
-  <div class="modal">
-    <div class="detail-handle"></div>
-    <div class="detail-body">
-      <div class="detail-title" id="detailTitle"></div>
-      <div class="detail-tags" id="detailTags"></div>
-      <div id="detailLinkWrap"></div>
-      <div class="section-title">🧂 材料</div>
-      <div class="scaling-bar">
-        <span class="scaling-label">何人前で表示？</span>
-        <button class="servings-btn" id="scaleDec">−</button>
-        <span class="servings-num" id="scaleNum">4</span>
+  <div class="page-body">
+    <div class="form-group">
+      <label class="form-label">料理名 *</label>
+      <input class="form-input" id="fName" placeholder="例：ねぎ塩豚ひき炒飯">
+    </div>
+    <div class="form-group">
+      <label class="form-label">カテゴリ</label>
+      <select class="form-select" id="fCat">
+        <option value="">選択してください</option>
+        <option value="和食">和食</option>
+        <option value="洋食">洋食</option>
+        <option value="中華">中華</option>
+        <option value="イタリアン">イタリアン</option>
+        <option value="スープ">スープ</option>
+        <option value="おつまみ">おつまみ</option>
+        <option value="デザート">デザート</option>
+        <option value="その他">その他</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">レシピのURL（インスタ・クックパッドなど）</label>
+      <input class="form-input" id="fUrl" type="url" placeholder="https://...">
+      <div class="url-hint">インスタの投稿URLもそのまま貼れます</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">何人前のレシピ？</label>
+      <div class="servings-ctrl">
+        <button class="servings-btn" id="servDec">−</button>
+        <span class="servings-num" id="servNum">2</span>
         <span class="servings-label">人前</span>
-        <button class="servings-btn" id="scaleInc">＋</button>
+        <button class="servings-btn" id="servInc">＋</button>
       </div>
-      <table class="ing-table" id="ingTable"></table>
-      <div class="section-title">📝 メモ</div>
-      <div class="detail-memo" id="detailMemo"></div>
-      <div class="detail-actions">
-        <button class="btn-edit" id="editBtn">✏️ 編集</button>
-        <button class="btn-delete" id="deleteBtn">🗑️</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">材料（数値を入れると自動スケーリング）</label>
+      <div class="ingredient-list" id="ingList"></div>
+      <button class="add-ing-btn" id="addIngBtn">＋ 材料を追加</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">作り方・メモ</label>
+      <textarea class="form-textarea" id="fMemo" placeholder="作り方のポイントや自分なりのメモなど..."></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">タグ（Enterで追加）</label>
+      <div class="tags-wrap" id="tagsWrap">
+        <input class="tags-input" id="tagInput" placeholder="例：簡単、子ども好き">
       </div>
+    </div>
+    <button class="btn-save" id="saveBtn">保存する</button>
+  </div>
+</div>
+
+<!-- ===== DETAIL PAGE ===== -->
+
+<div class="page" id="pageDetail">
+  <div class="header">
+    <button class="back-btn" id="detailBackBtn">‹</button>
+    <span class="header-title">レシピ詳細</span>
+    <button class="fav-btn" id="detailFavBtn" style="font-size:22px;background:none;border:none;cursor:pointer;color:white;">☆</button>
+  </div>
+  <div class="page-body">
+    <div class="detail-title" id="detailTitle"></div>
+    <div class="detail-tags" id="detailTags"></div>
+    <div id="detailLinkWrap"></div>
+    <div class="section-title">🧂 材料</div>
+    <div class="scaling-bar">
+      <span class="scaling-label">何人前で表示？</span>
+      <button class="servings-btn" id="scaleDec">−</button>
+      <span class="servings-num" id="scaleNum">4</span>
+      <span class="servings-label">人前</span>
+      <button class="servings-btn" id="scaleInc">＋</button>
+    </div>
+    <table class="ing-table" id="ingTable"></table>
+    <div class="section-title">📝 メモ</div>
+    <div class="detail-memo" id="detailMemo"></div>
+    <div class="detail-actions">
+      <button class="btn-edit" id="editBtn">✏️ 編集</button>
+      <button class="btn-delete" id="deleteBtn">🗑️ 削除</button>
     </div>
   </div>
 </div>
@@ -244,23 +236,19 @@ header { background: var(–ink); padding: 20px 24px 16px; display: flex; align-
 <script>
 const STORAGE_KEY = 'recipe_collection_v2';
 let recipes = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-let currentFilter = 'all', searchQuery = '', editingId = null, viewingRecipe = null;
+let currentFilter = 'all', searchQuery = '';
+let editingId = null, viewingRecipe = null;
 let scaleServings = 4, formServings = 2;
 let formTags = [], formIngredients = [];
 
-function openModal(id) {
-  document.getElementById('mainContainer').style.display = 'none';
-  document.getElementById('addBtn').style.display = 'none';
-  document.getElementById(id).classList.add('open');
-}
-function closeModal(id) {
-  document.getElementById(id).classList.remove('open');
-  if (!document.querySelector('.modal-overlay.open')) {
-    document.getElementById('mainContainer').style.display = '';
-    document.getElementById('addBtn').style.display = '';
-  }
+// ---- ページ切り替え ----
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
 }
 
+// ---- リスト ----
 function getLinkLabel(url) {
   if (!url) return '元のレシピを見る';
   if (url.includes('instagram.com')) return 'Instagramで見る';
@@ -277,7 +265,7 @@ function render() {
   else if (currentFilter !== 'all') list = list.filter(r => r.category === currentFilter);
   if (searchQuery) {
     const q = searchQuery.toLowerCase();
-    list = list.filter(r => r.name.toLowerCase().includes(q) || (r.tags||[]).some(t=>t.toLowerCase().includes(q)) || (r.category||'').toLowerCase().includes(q));
+    list = list.filter(r => r.name.toLowerCase().includes(q) || (r.tags||[]).some(t => t.toLowerCase().includes(q)) || (r.category||'').toLowerCase().includes(q));
   }
   document.getElementById('headerCount').textContent = recipes.length + '品';
   document.getElementById('recipeCount').textContent = list.length + '品のレシピ';
@@ -298,130 +286,144 @@ function render() {
       </div>
       <div class="card-meta">
         ${r.servings?`<span>📋 ${r.servings}人前基準</span>`:''}
-        ${r.url?`<a class="card-link" href="${r.url}" target="_blank" onclick="event.stopPropagation()">🔗 ${getLinkLabel(r.url)}</a>`:''}
+        ${r.url?`<a class="card-link" href="${r.url}" target="_blank">🔗 ${getLinkLabel(r.url)}</a>`:''}
       </div>
     </div>`).join('');
+
   grid.querySelectorAll('.recipe-card').forEach(card => {
-    card.addEventListener('click', e => { if(e.target.closest('.fav-btn')||e.target.closest('.card-link')) return; openDetail(card.dataset.id); });
+    card.addEventListener('click', e => {
+      if (e.target.closest('.fav-btn') || e.target.closest('.card-link')) return;
+      openDetail(card.dataset.id);
+    });
   });
   grid.querySelectorAll('.fav-btn').forEach(btn => {
-    btn.addEventListener('click', e => { e.stopPropagation(); const r=recipes.find(x=>x.id===btn.dataset.fav); if(r){r.fav=!r.fav;save();} });
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const r = recipes.find(x => x.id === btn.dataset.fav);
+      if (r) { r.fav = !r.fav; save(); }
+    });
   });
 }
+
 function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(recipes)); render(); }
 
 document.getElementById('filterBar').addEventListener('click', e => {
-  const chip = e.target.closest('.filter-chip'); if(!chip) return;
-  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
-  chip.classList.add('active'); currentFilter=chip.dataset.cat; render();
+  const chip = e.target.closest('.filter-chip'); if (!chip) return;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active'); currentFilter = chip.dataset.cat; render();
 });
-document.getElementById('searchInput').addEventListener('input', e => { searchQuery=e.target.value; render(); });
+document.getElementById('searchInput').addEventListener('input', e => { searchQuery = e.target.value; render(); });
 
-function openAddModal(recipe=null) {
-  editingId = recipe?recipe.id:null;
-  document.getElementById('modalTitle').textContent = recipe?'レシピを編集':'レシピを追加';
-  document.getElementById('fName').value = recipe?recipe.name:'';
-  document.getElementById('fCat').value = recipe?(recipe.category||''):'';
-  document.getElementById('fUrl').value = recipe?(recipe.url||''):'';
-  document.getElementById('fMemo').value = recipe?(recipe.memo||''):'';
-  formServings = recipe?(recipe.servings||2):2;
+// ---- フォーム ----
+function openAddForm(recipe=null) {
+  editingId = recipe ? recipe.id : null;
+  document.getElementById('formTitle').textContent = recipe ? 'レシピを編集' : 'レシピを追加';
+  document.getElementById('fName').value = recipe ? recipe.name : '';
+  document.getElementById('fCat').value = recipe ? (recipe.category||'') : '';
+  document.getElementById('fUrl').value = recipe ? (recipe.url||'') : '';
+  document.getElementById('fMemo').value = recipe ? (recipe.memo||'') : '';
+  formServings = recipe ? (recipe.servings||2) : 2;
   document.getElementById('servNum').textContent = formServings;
-  formTags = recipe?[...(recipe.tags||[])]:[];
-  formIngredients = recipe?(recipe.ingredients||[]).map(i=>({...i})):[];
-  if(formIngredients.length===0) formIngredients=[{name:'',amount:''}];
+  formTags = recipe ? [...(recipe.tags||[])] : [];
+  formIngredients = recipe ? (recipe.ingredients||[]).map(i=>({...i})) : [];
+  if (formIngredients.length === 0) formIngredients = [{name:'',amount:''}];
   renderTags(); renderIngredients();
-  openModal('addModal');
+  showPage('pageForm');
 }
 
-document.getElementById('addBtn').addEventListener('click', ()=>openAddModal());
-document.getElementById('closeAdd').addEventListener('click', ()=>closeModal('addModal'));
-document.getElementById('addModal').addEventListener('click', e=>{ if(e.target===document.getElementById('addModal')) closeModal('addModal'); });
-document.getElementById('servDec').addEventListener('click', ()=>{ if(formServings>1){formServings--;document.getElementById('servNum').textContent=formServings;} });
-document.getElementById('servInc').addEventListener('click', ()=>{ formServings++;document.getElementById('servNum').textContent=formServings; });
+document.getElementById('addBtn').addEventListener('click', () => openAddForm());
+document.getElementById('formBackBtn').addEventListener('click', () => showPage('pageList'));
+document.getElementById('servDec').addEventListener('click', () => { if(formServings>1){formServings--;document.getElementById('servNum').textContent=formServings;} });
+document.getElementById('servInc').addEventListener('click', () => { formServings++;document.getElementById('servNum').textContent=formServings; });
 
 function renderTags() {
-  const wrap=document.getElementById('tagsWrap'); wrap.innerHTML='';
-  formTags.forEach((t,i)=>{
-    const el=document.createElement('span'); el.className='tag-item';
-    el.innerHTML=`${t}<button class="tag-remove">×</button>`;
-    el.querySelector('.tag-remove').addEventListener('click',()=>{ formTags.splice(i,1); renderTags(); });
+  const wrap = document.getElementById('tagsWrap'); wrap.innerHTML = '';
+  formTags.forEach((t, i) => {
+    const el = document.createElement('span'); el.className = 'tag-item';
+    el.innerHTML = `${t}<button class="tag-remove">×</button>`;
+    el.querySelector('.tag-remove').addEventListener('click', () => { formTags.splice(i,1); renderTags(); });
     wrap.appendChild(el);
   });
-  const input=document.createElement('input'); input.className='tags-input'; input.id='tagInput';
-  input.placeholder=formTags.length?'':'例：簡単、子ども好き';
-  input.addEventListener('keydown',e=>{
-    if((e.key==='Enter'||e.key===',')&&input.value.trim()){ e.preventDefault(); formTags.push(input.value.trim()); renderTags(); }
-    if(e.key==='Backspace'&&!input.value&&formTags.length){ formTags.pop(); renderTags(); }
+  const input = document.createElement('input'); input.className = 'tags-input';
+  input.placeholder = formTags.length ? '' : '例：簡単、子ども好き';
+  input.addEventListener('keydown', e => {
+    if ((e.key==='Enter'||e.key===',') && input.value.trim()) { e.preventDefault(); formTags.push(input.value.trim()); renderTags(); }
+    if (e.key==='Backspace' && !input.value && formTags.length) { formTags.pop(); renderTags(); }
   });
-  wrap.appendChild(input); wrap.addEventListener('click',()=>input.focus());
+  wrap.appendChild(input); wrap.addEventListener('click', () => input.focus());
 }
 
 function renderIngredients() {
-  const list=document.getElementById('ingList'); list.innerHTML='';
-  formIngredients.forEach((ing,i)=>{
-    const row=document.createElement('div'); row.className='ingredient-row';
-    row.innerHTML=`<input type="text" placeholder="材料名" value="${ing.name}" data-field="name" data-i="${i}"><input type="text" class="amount" placeholder="量" value="${ing.amount}" data-field="amount" data-i="${i}"><button class="remove-ing">×</button>`;
-    row.querySelectorAll('input').forEach(inp=>inp.addEventListener('input',()=>{ formIngredients[inp.dataset.i][inp.dataset.field]=inp.value; }));
-    row.querySelector('.remove-ing').addEventListener('click',()=>{ formIngredients.splice(i,1); if(formIngredients.length===0)formIngredients=[{name:'',amount:''}]; renderIngredients(); });
+  const list = document.getElementById('ingList'); list.innerHTML = '';
+  formIngredients.forEach((ing, i) => {
+    const row = document.createElement('div'); row.className = 'ingredient-row';
+    row.innerHTML = `<input type="text" placeholder="材料名" value="${ing.name}" data-field="name" data-i="${i}"><input type="text" placeholder="量" value="${ing.amount}" data-field="amount" data-i="${i}"><button class="remove-ing">×</button>`;
+    row.querySelectorAll('input').forEach(inp => inp.addEventListener('input', () => { formIngredients[inp.dataset.i][inp.dataset.field] = inp.value; }));
+    row.querySelector('.remove-ing').addEventListener('click', () => { formIngredients.splice(i,1); if(formIngredients.length===0)formIngredients=[{name:'',amount:''}]; renderIngredients(); });
     list.appendChild(row);
   });
 }
-document.getElementById('addIngBtn').addEventListener('click',()=>{ formIngredients.push({name:'',amount:''}); renderIngredients(); document.getElementById('ingList').lastElementChild?.querySelector('input')?.focus(); });
+document.getElementById('addIngBtn').addEventListener('click', () => { formIngredients.push({name:'',amount:''}); renderIngredients(); document.getElementById('ingList').lastElementChild?.querySelector('input')?.focus(); });
 
-document.getElementById('saveBtn').addEventListener('click',()=>{
-  const name=document.getElementById('fName').value.trim();
-  if(!name){ alert('料理名を入力してください'); return; }
-  const recipe={
-    id: editingId||Date.now().toString(),
+document.getElementById('saveBtn').addEventListener('click', () => {
+  const name = document.getElementById('fName').value.trim();
+  if (!name) { alert('料理名を入力してください'); return; }
+  const recipe = {
+    id: editingId || Date.now().toString(),
     name,
     category: document.getElementById('fCat').value,
     url: document.getElementById('fUrl').value.trim(),
     memo: document.getElementById('fMemo').value.trim(),
     servings: formServings,
-    ingredients: formIngredients.filter(i=>i.name.trim()),
+    ingredients: formIngredients.filter(i => i.name.trim()),
     tags: formTags,
     fav: false,
     createdAt: Date.now()
   };
-  if(editingId){
-    const idx=recipes.findIndex(r=>r.id===editingId);
-    if(idx!==-1){ recipe.fav=recipes[idx].fav; recipe.createdAt=recipes[idx].createdAt; recipes[idx]=recipe; }
+  if (editingId) {
+    const idx = recipes.findIndex(r => r.id === editingId);
+    if (idx !== -1) { recipe.fav = recipes[idx].fav; recipe.createdAt = recipes[idx].createdAt; recipes[idx] = recipe; }
   } else {
     recipes.unshift(recipe);
   }
   save();
-  closeModal('addModal');
+  showPage('pageList');
 });
 
+// ---- 詳細 ----
 function openDetail(id) {
-  viewingRecipe=recipes.find(r=>r.id===id); if(!viewingRecipe) return;
-  scaleServings=4; renderDetail(); openModal('detailModal');
-}
-function renderDetail() {
-  const r=viewingRecipe;
-  document.getElementById('scaleNum').textContent=scaleServings;
-  document.getElementById('detailTitle').textContent=r.name;
-  let th=''; if(r.category) th+=`<span class="tag tag-cat">${r.category}</span>`; (r.tags||[]).forEach(t=>{ th+=`<span class="tag tag-custom">${t}</span>`; });
-  document.getElementById('detailTags').innerHTML=th;
-  document.getElementById('detailLinkWrap').innerHTML=r.url?`<a class="link-btn" href="${r.url}" target="_blank"><span class="link-btn-icon">🔗</span>${getLinkLabel(r.url)}</a>`:'';
-  const ratio=scaleServings/(r.servings||2);
-  let thtml=(r.ingredients||[]).map(ing=>`<tr><td>${ing.name}</td><td>${scaleAmount(ing.amount,ratio)}</td></tr>`).join('');
-  if(!thtml) thtml=`<tr><td colspan="2" style="color:var(--ink-light);font-size:13px;">材料が登録されていません</td></tr>`;
-  document.getElementById('ingTable').innerHTML=thtml;
-  const memo=document.getElementById('detailMemo'); memo.textContent=r.memo||'メモなし'; memo.style.color=r.memo?'var(--ink)':'var(--ink-light)';
-}
-function scaleAmount(str,ratio){
-  if(!str) return '';
-  return str.replace(/[\d.]+/g,m=>{ const n=parseFloat(m); if(isNaN(n)) return m; const s=n*ratio; return s===Math.floor(s)?s.toString():(Math.round(s*10)/10)+''; });
+  viewingRecipe = recipes.find(r => r.id === id); if (!viewingRecipe) return;
+  scaleServings = 4; renderDetail(); showPage('pageDetail');
 }
 
-document.getElementById('scaleDec').addEventListener('click',()=>{ if(scaleServings>1){scaleServings--;renderDetail();} });
-document.getElementById('scaleInc').addEventListener('click',()=>{ scaleServings++;renderDetail(); });
-document.getElementById('detailModal').addEventListener('click',e=>{ if(e.target===document.getElementById('detailModal')) closeModal('detailModal'); });
-document.getElementById('editBtn').addEventListener('click',()=>{ closeModal('detailModal'); openAddModal(viewingRecipe); });
-document.getElementById('deleteBtn').addEventListener('click',()=>{
-  if(!confirm(`「${viewingRecipe.name}」を削除しますか？`)) return;
-  recipes=recipes.filter(r=>r.id!==viewingRecipe.id); save(); closeModal('detailModal');
+function renderDetail() {
+  const r = viewingRecipe;
+  document.getElementById('scaleNum').textContent = scaleServings;
+  document.getElementById('detailTitle').textContent = r.name;
+  document.getElementById('detailFavBtn').textContent = r.fav ? '⭐' : '☆';
+  let th = ''; if (r.category) th += `<span class="tag tag-cat">${r.category}</span>`; (r.tags||[]).forEach(t => { th += `<span class="tag tag-custom">${t}</span>`; });
+  document.getElementById('detailTags').innerHTML = th;
+  document.getElementById('detailLinkWrap').innerHTML = r.url ? `<a class="link-btn" href="${r.url}" target="_blank">🔗 ${getLinkLabel(r.url)}</a>` : '';
+  const ratio = scaleServings / (r.servings||2);
+  let thtml = (r.ingredients||[]).map(ing => `<tr><td>${ing.name}</td><td>${scaleAmount(ing.amount, ratio)}</td></tr>`).join('');
+  if (!thtml) thtml = `<tr><td colspan="2" style="color:var(--ink-light);font-size:13px;">材料が登録されていません</td></tr>`;
+  document.getElementById('ingTable').innerHTML = thtml;
+  const memo = document.getElementById('detailMemo'); memo.textContent = r.memo||'メモなし'; memo.style.color = r.memo ? 'var(--ink)' : 'var(--ink-light)';
+}
+
+function scaleAmount(str, ratio) {
+  if (!str) return '';
+  return str.replace(/[\d.]+/g, m => { const n=parseFloat(m); if(isNaN(n)) return m; const s=n*ratio; return s===Math.floor(s)?s.toString():(Math.round(s*10)/10)+''; });
+}
+
+document.getElementById('scaleDec').addEventListener('click', () => { if(scaleServings>1){scaleServings--;renderDetail();} });
+document.getElementById('scaleInc').addEventListener('click', () => { scaleServings++;renderDetail(); });
+document.getElementById('detailBackBtn').addEventListener('click', () => showPage('pageList'));
+document.getElementById('detailFavBtn').addEventListener('click', () => { viewingRecipe.fav=!viewingRecipe.fav; save(); renderDetail(); });
+document.getElementById('editBtn').addEventListener('click', () => openAddForm(viewingRecipe));
+document.getElementById('deleteBtn').addEventListener('click', () => {
+  if (!confirm(`「${viewingRecipe.name}」を削除しますか？`)) return;
+  recipes = recipes.filter(r => r.id !== viewingRecipe.id); save(); showPage('pageList');
 });
 
 renderTags(); renderIngredients(); render();
