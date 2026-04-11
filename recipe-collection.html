@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>レシピ帳</title>
+<title>My Recipes</title>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -139,7 +139,7 @@
 <body>
 
 <header>
-  <div class="logo"><span>🍳</span><span>わたしのレシピ帳</span></div>
+  <div class="logo"><span>🍳</span><span>My Recipes</span></div>
   <span class="header-count" id="headerCount">0品</span>
 </header>
 
@@ -420,11 +420,22 @@ function renderIngredients() {
 document.getElementById('addIngBtn').addEventListener('click',()=>{formIngredients.push({name:'',amount:''});renderIngredients();document.getElementById('ingList').lastElementChild?.querySelector('input')?.focus();});
 
 document.getElementById('saveBtn').addEventListener('click',()=>{
-  const name=document.getElementById('fName').value.trim();if(!name){alert('料理名を入力してください');return;}
+  alert('保存ボタン押された');
+  const name=document.getElementById('fName').value.trim();
+  alert('名前: ' + name);
+  if(!name){alert('料理名を入力してください');return;}
+  alert('レシピ作成中...');
   const recipe={id:editingId||Date.now().toString(),name,category:document.getElementById('fCat').value,url:document.getElementById('fUrl').value.trim(),memo:document.getElementById('fMemo').value.trim(),servings:formServings,ingredients:formIngredients.filter(i=>i.name.trim()),tags:formTags,image:imgDataUrl,subImages:formSubImages,fav:false,createdAt:Date.now()};
-  if(editingId){const idx=recipes.findIndex(r=>r.id===editingId);if(idx!==-1){recipe.fav=recipes[idx].fav;recipe.createdAt=recipes[idx].createdAt;recipes[idx]=recipe;}}
-  else{recipes.unshift(recipe);}
-  save();closeModal('addModal');
+  alert('保存処理開始...');
+  try {
+    if(editingId){const idx=recipes.findIndex(r=>r.id===editingId);if(idx!==-1){recipe.fav=recipes[idx].fav;recipe.createdAt=recipes[idx].createdAt;recipes[idx]=recipe;}}
+    else{recipes.unshift(recipe);}
+    save();
+    alert('保存成功！');
+    closeModal('addModal');
+  } catch(e) {
+    alert('エラー: ' + e.message);
+  }
 });
 
 function openDetail(id) {
